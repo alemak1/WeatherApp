@@ -27,8 +27,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let baseURL = NSURL(string: "https://api.darksky.net/forecast/\(forecastAPIKey)/")
-        let forecastURL = NSURL(string: "37.8267,-122.4233", relativeToURL: baseURL as URL?)
+        let baseURL = URL(string: "https://api.darksky.net/forecast/\(forecastAPIKey)/")
+        let forecastURL = URL(string: "37.8267,-122.4233", relativeTo: baseURL)
+        
 
         let icon = WeatherIcon.PartlyCloudyDay.image
         let currentWeather = CurrentWeather(temperature: 56.0, humidity: 1.0, precipitationProbability: 1.0, summary: "Wet and Rainy", icon: icon)
