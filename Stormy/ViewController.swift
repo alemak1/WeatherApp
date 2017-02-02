@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var currentTemperatureLabel: UILabel!
@@ -22,6 +24,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        let icon = WeatherIcon.PartlyCloudyDay.image
+        let currentWeather = CurrentWeather(temperature: 56.0, humidity: 1.0, precipitationProbability: 1.0, summary: "Wet and Rainy", icon: icon)
+        
+        displayCurrentWeather(weather: currentWeather)
+    }
+    
+    
+    func displayCurrentWeather(weather: CurrentWeather){
+        currentTemperatureLabel.text = weather.temperatureString
+        currentHumidityLabel.text = weather.humidityString
+        currentPrecipitationLabel.text = weather.precipitationProbabilityString
+        currentSummaryLabel.text = weather.summary
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,4 +45,27 @@ class ViewController: UIViewController {
 
 
 }
+
+
+extension CurrentWeather{
+    
+    var humidityString: String{
+        let percentageValue = Int(humidity*100)
+        return "\(percentageValue) %"
+    }
+    
+    var precipitationProbabilityString: String{
+        let percentageValue = Int(precipitationProbability*100)
+        return "\(percentageValue) %"
+    }
+    
+    var temperatureString: String{
+        let temperatureValue = Int(temperature)
+        return "\(temperatureValue)º"
+    }
+    
+    
+    
+}
+
 
